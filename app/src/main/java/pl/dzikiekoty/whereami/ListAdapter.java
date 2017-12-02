@@ -13,48 +13,23 @@ import java.util.List;
 
 import pl.dzikiekoty.whereami.Model.Location;
 
-public class ListAdapter extends ArrayAdapter
+public class ListAdapter extends ArrayAdapter<Location>
 {
-    private Context context;
-    private List<Location> loc;
-
-    public ListAdapter(Context context, int textViewResourceId, List objects) {
-        super(context,textViewResourceId, objects);
-
-        this.context = context;
-        loc = objects;
-
+    public ListAdapter(Context context, List<Location> loc) {
+        super(context, 0, loc);
     }
-
-    private class ViewHolder
-    {
-        TextView longtitude;
-        TextView latitude;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        ViewHolder holder = null;
+        Location loc = getItem(position);
         if (convertView == null)
         {
-            LayoutInflater vi = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = vi.inflate(R.layout.row, null);
-
-            holder = new ViewHolder();
-            holder.longtitude = (TextView) convertView.findViewById(R.id.Row1);
-            holder.latitude = (TextView) convertView.findViewById(R.id.Row2);
-            convertView.setTag(holder);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
         }
-        else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-
-        Location lc = loc.get(position);
-        holder.longtitude.setText("Car Place: " +  lc.getLongtitude() + "");
-        holder.latitude.setText("Car Name: "+ lc.getLatitude()+"");
+        TextView longtitude = convertView.findViewById(R.id.Row1);
+        TextView latitude = convertView.findViewById(R.id.Row2);
+        longtitude.setText(loc.getLongtitude());
+        latitude.setText(loc.getLatitude());
         return convertView;
-
-
     }
 }

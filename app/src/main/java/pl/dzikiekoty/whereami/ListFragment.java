@@ -20,21 +20,16 @@ import pl.dzikiekoty.whereami.Model.Location;
 
 public class ListFragment extends Fragment
 {
-    private ListView list;
-    ListAdapter listAdapter;
-    DataManagerImpl db;
-    List<Location> loc;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
 
-        loc = db.getLocations();
-        listAdapter = new ListAdapter(getActivity(), R.layout.row, loc);
-
-        list = view.findViewById(R.id.list);
-        list.setAdapter(listAdapter);
+        ArrayList<Location> list = new ArrayList<>();
+        ListAdapter adapter = new ListAdapter(getActivity(), list);
+        ListView listView = view.findViewById(R.id.container);
+        if(listView!=null)
+            listView.setAdapter(adapter);
         return view;
     }
 }
