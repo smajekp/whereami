@@ -28,8 +28,8 @@ public class ListAdapter extends ArrayAdapter<Location>
         }
         TextView longtitude = convertView.findViewById(R.id.Row1);
         TextView latitude = convertView.findViewById(R.id.Row2);
-        longtitude.setText(loc.getLongtitude());
-        latitude.setText(loc.getLatitude());
+        longtitude.setText("Longitude: " + loc.getLongtitude() + "");
+        latitude.setText("Latitude: " + loc.getLatitude());
         return convertView;
     }
 }

@@ -20,6 +20,7 @@ import pl.dzikiekoty.whereami.Model.Location;
 
 public class ListFragment extends Fragment
 {
+    ListView lv;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -27,9 +28,13 @@ public class ListFragment extends Fragment
 
         ArrayList<Location> list = new ArrayList<>();
         ListAdapter adapter = new ListAdapter(getActivity(), list);
-        ListView listView = view.findViewById(R.id.container);
-        if(listView!=null)
-            listView.setAdapter(adapter);
+        lv = (ListView) view.findViewById(R.id.list);
+        Location newloc = new Location(1, "test", "test");
+        adapter.add(newloc);
+        Location newloc1 = new Location(2, "test2", "test2");
+        adapter.add(newloc1);
+        if(lv!=null)
+            lv.setAdapter(adapter);
         return view;
     }
 }
