@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.dzikiekoty.whereami.MainActivity">
+    tools:context="pl.dzikiekoty.whereami.MapActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello World!"/>
+                android:text="Hello World! Map Activity"/>
 
         </LinearLayout>
         <LinearLayout
@@ -31,16 +31,8 @@
                 android:id="@+id/listActivityBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="goToMapActivity"
-                android:text="Go to map" />
-
-            <Button
-                android:id="@+id/bindServiceBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="goToListActivity"
-                android:text="Go to list activity" />
+                android:onClick="goToMainActivity"
+                android:text="Go to main activity" />
         </LinearLayout>
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
