@@ -13,5 +13,5 @@ public interface DataManager {
     List<Location> getLocations();
     Location findLocation(String longitude, String latitude);
     int saveLocation(Location location);
-    boolean deleteLocation(int locationID);
+    void deleteLocation(int locationID);
 }

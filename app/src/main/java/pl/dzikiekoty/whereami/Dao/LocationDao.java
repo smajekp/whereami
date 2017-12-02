@@ -50,13 +50,13 @@ public class LocationDao implements Dao<Location> {
     }
 
     @Override
-    public void delete(Location location) {
-        if( location.getIdLocation() > 0){
+    public void delete(int idLocation) {
+
             db.delete(LocationTable.TABLE_NAME,
                     LocationTable.ID_LOCATION + " = ?", new String[]{
-                            String.valueOf(location.getIdLocation())
+                            String.valueOf(idLocation)
                     });
-        }
+
     }
 
     @Override

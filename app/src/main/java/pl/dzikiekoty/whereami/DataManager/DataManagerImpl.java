@@ -54,14 +54,7 @@ public class DataManagerImpl implements DataManager{
     @Override
     public Location getLocation(int locationID) {
         Location location = locationDAO.get(locationID);
-        if(location != null){
-            List<Group> groupList= studentGroupDAO.getGroups(studentID);
-            if(groupList.size() > 0){
-                Set<Group> selectedGroupsSet = new HashSet<Group>(groupList);
-                student.getGroups().addAll(selectedGroupsSet);
-            }
-        }
-        return location;
+            return location;
     }
 
     @Override
@@ -80,22 +73,7 @@ public class DataManagerImpl implements DataManager{
         int idLocation = 0;
         try{
             db.beginTransaction();
-            idLocation= LocationDao.save(location);
-            if(location.getGroups() != null){
-                for(Group group : student.getGroups()){
-                    int idGroup;
-                    Group dbGroup = groupDAO.find(group.getGroupName());
-                    if(dbGroup == null){
-                        idGroup = groupDAO.save(group);
-                    }else{
-                        idGroup = dbGroup.getIdGroup();
-                    }
-                    StudentGroup studentGroup = new StudentGroup(idStudent, idGroup);
-                    if(!studentGroupDAO.exists(studentGroup)){
-                        studentGroupDAO.save(studentGroup);
-                    }
-                }
-            }
+            idLocation= locationDAO.save(location);
             db.setTransactionSuccessful();
         }catch(SQLException e){
             System.out.println("Bład" + e.getMessage());
@@ -108,30 +86,8 @@ public class DataManagerImpl implements DataManager{
 
     //TODO
     @Override
-    public boolean deleteLocation(int locationID) {
-        boolean result = false;
-        try {
-            db.beginTransaction();
-
-            Location location = getLocation(locationID);
-
-            if (location != null) {
-                if( student.getGroups().size() > 0){
-                    List<Group> groupList = new ArrayList<>( student.getGroups());
-                    for (int i = 0; i < groupList.size(); i++) {
-                        studentGroupDAO.delete(new StudentGroup(student.getIdStudent(), groupList.get(i).getIdGroup()));
-                    }
-                }
-                studentDAO.delete(student);
-            }
-            db.setTransactionSuccessful();
-            result = true;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            db.endTransaction();
-        }
-        return result;
+    public void deleteLocation(int locationID) {
+        locationDAO.delete(locationID);
     }
 
 }

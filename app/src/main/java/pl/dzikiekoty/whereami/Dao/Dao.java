@@ -9,7 +9,7 @@ import java.util.List;
 public interface Dao<T> {
     int save(T type);
     void update(T type);
-    void delete(T type);
+    void delete(int id);
     T get(int id);
     List<T> getAll();
 }
