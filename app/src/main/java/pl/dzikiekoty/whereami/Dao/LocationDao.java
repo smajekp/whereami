@@ -11,10 +11,6 @@ import java.util.List;
 import pl.dzikiekoty.whereami.Model.Location;
 import pl.dzikiekoty.whereami.Tables.LocationTable;
 
-/**
- * Created by Piotr Smajek on 30.11.2017.
- */
-
 public class LocationDao implements Dao<Location> {
 
     private static final String INSERT_LOCATION_TABLE =
