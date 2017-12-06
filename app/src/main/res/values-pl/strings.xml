@@ -3,4 +3,13 @@
     <string name="app_name">WhereAmI</string>
     <string name="hi">Czesc WhereAmI</string>
     <string name="addBtn">Dodaj lokację</string>
+    <string name="hello_blank_fragment">Witaj w Naszej aplikacji</string>
+    <string name="settings_title">Ustawienia</string>
+    <string name="settings_subtitle">Wpisz ilosc sekund</string>
+    <string name="save_button_title">Zapisz</string>
+    <string name="clear_button_title">Wyczysc</string>
+    <string name="btn_home">Dom</string>
+    <string name="btn_map">Mapa</string>
+    <string name="btn_list">Lista</string>
+    <string name="btn_settings">Ustawienia</string>
 </resources>

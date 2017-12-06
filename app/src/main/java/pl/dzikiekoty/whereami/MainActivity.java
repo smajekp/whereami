@@ -1,16 +1,20 @@
 package pl.dzikiekoty.whereami;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.app.Fragment;
+import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingsFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener {
     LocationManager locationManager;
 
 
@@ -21,6 +25,19 @@ public class MainActivity extends AppCompatActivity {
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         checkLocation();
 
+        Button mClickButton1 = (Button)findViewById(R.id.homeBtn);
+        mClickButton1.setOnClickListener(this);
+        Button mClickButton2 = (Button)findViewById(R.id.settingsBtn);
+        mClickButton2.setOnClickListener(this);
+
+        // set welcome screen on start
+        HomeFragment fragment0 = new HomeFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.linear, fragment0);
+        transaction.addToBackStack(null);
+
+        transaction.commit();
     }
 
     public void goToMapActivity(View v) {
@@ -63,6 +80,52 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isLocationEnabled() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case  R.id.homeBtn: {
+                HomeFragment fragment0 = new HomeFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.linear, fragment0);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+                break;
+            }
+            case  R.id.settingsBtn: {
+                SettingsFragment fragment1 = new SettingsFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.linear, fragment1);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+                break;
+            }
+
+//            case R.id.button2: {
+//                BlankFragmentSecond fragment2 = new BlankFragmentSecond();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//
+//                transaction.replace(R.id.linear, fragment2);
+//                transaction.addToBackStack(null);
+//
+//                transaction.commit();
+//                break;
+//            }
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
 }
