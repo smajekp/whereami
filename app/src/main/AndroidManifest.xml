@@ -3,7 +3,7 @@
     package="pl.dzikiekoty.whereami">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -20,10 +20,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapActivity" />
-        <activity android:name=".ListActivity"></activity>
+        <activity android:name=".ListActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB55_2FRKH2Ab-bz18JSirrMnvmPDqW2Kw"/>
+            android:value="AIzaSyB55_2FRKH2Ab-bz18JSirrMnvmPDqW2Kw" />
+
+        <service
+            android:name=".AddLocationService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
