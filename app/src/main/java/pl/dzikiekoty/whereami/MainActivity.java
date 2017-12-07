@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.location.LocationManager;
 import android.app.Fragment;
 import android.net.Uri;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startService(serviceIntent);
         }
 
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager  = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         checkLocation();
 
         Button mClickButton1 = (Button)findViewById(R.id.homeBtn);
