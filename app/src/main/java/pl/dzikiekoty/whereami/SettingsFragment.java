@@ -2,6 +2,7 @@ package pl.dzikiekoty.whereami;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -96,11 +97,27 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         editor.putString(Name, n);
         editor.commit();
         Toast.makeText(getActivity(), "Zapisano", Toast.LENGTH_SHORT).show();
+
+        int nInt = Integer.parseInt(n);
+        if (n != null && nInt > 0 && n != "") {
+
+            Intent serviceIntent = new Intent(getActivity(), AddLocationService.class);
+            getActivity().stopService(serviceIntent);
+
+            Intent serviceIntent2 = new Intent(getActivity(), AddLocationService.class);
+            getActivity().startService(serviceIntent2);
+        }
     }
 
     public void clear() {
         name.setText("");
+        String n = name.getText().toString();
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(Name, "");
+        editor.commit();
         Toast.makeText(getActivity(), "Wyczyszczono", Toast.LENGTH_SHORT).show();
+        Intent serviceIntent2 = new Intent(getActivity(), AddLocationService.class);
+        getActivity().stopService(serviceIntent2);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
