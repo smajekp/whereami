@@ -38,10 +38,13 @@ public class ListFragment extends Fragment
     private Location loc;
     private int idLatitude;
 
+    public DataManager dataManager;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        dataManager = new DataManagerImpl(getActivity());
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         add = view.findViewById(R.id.addBtn);
         idLatitude = getActivity().getIntent().getIntExtra("UniqueKeyV2",0);
@@ -78,7 +81,7 @@ public class ListFragment extends Fragment
             latitudeGPS = location.getLatitude();
             loc.setLongitude(String.valueOf(longitudeGPS));
             loc.setLatitude(String.valueOf(latitudeGPS));
-            MainActivity.dataManager.saveLocation(loc);
+            dataManager.saveLocation(loc);
 
         }
 

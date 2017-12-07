@@ -14,10 +14,10 @@ import pl.dzikiekoty.whereami.Tables.LocationTable;
 public class LocationDao implements Dao<Location> {
 
     private static final String INSERT_LOCATION_TABLE =
-            "INSERT INTO " + LocationTable.TABLE_NAME + "("
-                    + LocationTable.LONGITUDE + ","
+            "INSERT INTO " + LocationTable.TABLE_NAME + " ("
+                    + LocationTable.LONGITUDE + ", "
                     + LocationTable.LATITUDE + ")"
-                    + "VALUES(?,?,?)";
+                    + " VALUES (?,?)";
     private SQLiteDatabase db;
     private SQLiteStatement insertStatement;
 

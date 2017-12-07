@@ -25,13 +25,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String mypreference = "mypref";
     public static final String Name = "nameKey";
     private int value;
-    public static DataManager dataManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dataManager = new DataManagerImpl(this);
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         String strValue = sharedpreferences.getString(Name, "");
         int nInt = 0;
