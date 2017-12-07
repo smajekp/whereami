@@ -12,7 +12,7 @@ import pl.dzikiekoty.whereami.Tables.LocationTable;
 
 public class OpenHelper extends SQLiteOpenHelper {
     private static OpenHelper instance;
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     public static synchronized OpenHelper getHelper(Context context){
         if(instance == null){
             instance = new OpenHelper(context);
