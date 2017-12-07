@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mClickButton1.setOnClickListener(this);
         Button mClickButton2 = (Button)findViewById(R.id.settingsBtn);
         mClickButton2.setOnClickListener(this);
+        Button mClickButton3 = (Button)findViewById(R.id.listBtn);
+        mClickButton3.setOnClickListener(this);
 
         // set welcome screen on start
         HomeFragment fragment0 = new HomeFragment();
@@ -63,10 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MainActivity.this.startActivity(intentMain);
     }
 
-    public void goToListActivity(View v) {
-        Intent intentMain = new Intent(MainActivity.this, ListActivity.class);
-        MainActivity.this.startActivity(intentMain);
-    }
 
     private boolean checkLocation() {
         if(!isLocationEnabled())
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(myIntent);
                     }
                 })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface paramDialogInterface, int paramInt) {
                         finish();
@@ -123,16 +121,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             }
 
-//            case R.id.button2: {
-//                BlankFragmentSecond fragment2 = new BlankFragmentSecond();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//
-//                transaction.replace(R.id.linear, fragment2);
-//                transaction.addToBackStack(null);
-//
-//                transaction.commit();
-//                break;
-//            }
+            case R.id.listBtn: {
+                ListFragment fragment3 = new ListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.linear, fragment3);
+                transaction.addToBackStack(null);
+
+               transaction.commit();
+                break;
+            }
         }
     }
 
