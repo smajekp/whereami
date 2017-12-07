@@ -8,17 +8,16 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class LocationTable {
 
-    public static final String TABLE_NAME = "locationsTable";
-    public static final String ID_LOCATION = "id_group";
+    public static final String TABLE_NAME = "locationsTables";
+    public static final String ID_LOCATION = "id_location";
     public static final String LONGITUDE = "longitude";
     public static final String LATITUDE = "latitude";
 
     public static void onCreate(SQLiteDatabase db){
         String CREATE_GROUP_TABLE = "CREATE TABLE " + TABLE_NAME + " ("
-                + ID_LOCATION + " INTEGER PRIMARY KEY,"
-                + LONGITUDE + " TEXT"
-                + LATITUDE + " TEXT"
-                + ")";
+                + ID_LOCATION + " INTEGER PRIMARY KEY, "
+                + LONGITUDE + " TEXT, "
+                + LATITUDE + " TEXT );";
         db.execSQL(CREATE_GROUP_TABLE);
     }
 

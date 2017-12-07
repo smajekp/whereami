@@ -14,10 +14,10 @@ import pl.dzikiekoty.whereami.Tables.LocationTable;
 public class LocationDao implements Dao<Location> {
 
     private static final String INSERT_LOCATION_TABLE =
-            "INSERT INTO " + LocationTable.TABLE_NAME + "("
-                    + LocationTable.LONGITUDE + ","
+            "INSERT INTO " + LocationTable.TABLE_NAME + " ("
+                    + LocationTable.LONGITUDE + ", "
                     + LocationTable.LATITUDE + ")"
-                    + "VALUES(?,?,?)";
+                    + " VALUES (?,?)";
     private SQLiteDatabase db;
     private SQLiteStatement insertStatement;
 
@@ -28,7 +28,7 @@ public class LocationDao implements Dao<Location> {
 
     public int save(Location location) {
         insertStatement.clearBindings();
-        insertStatement.bindString(1, location.getLongtitude());
+        insertStatement.bindString(1, location.getLongitude());
         insertStatement.bindString(2, location.getLatitude());
         return (int) insertStatement.executeInsert();
     }
@@ -36,7 +36,7 @@ public class LocationDao implements Dao<Location> {
     @Override
     public void update(Location location) {
         final ContentValues contentValues = new ContentValues();
-        contentValues.put(LocationTable.LONGITUDE, location.getLongtitude());
+        contentValues.put(LocationTable.LONGITUDE, location.getLongitude());
         contentValues.put(LocationTable.LATITUDE, location.getLatitude());
 
         db.update(LocationTable.TABLE_NAME, contentValues,
@@ -116,7 +116,7 @@ public class LocationDao implements Dao<Location> {
         if (cursor.moveToFirst()) {
             location = new Location();
             location.setIdLocation(cursor.getInt(0));
-            location.setLongtitude(cursor.getString(1));
+            location.setLongitude(cursor.getString(1));
             location.setLatitude(cursor.getString(2));
         }
         if (!cursor.isClosed()) {
@@ -130,7 +130,7 @@ public class LocationDao implements Dao<Location> {
         if (cursor != null) {
             location = new Location();
             location.setIdLocation(cursor.getInt(0));
-            location.setLongtitude(cursor.getString(1));
+            location.setLongitude(cursor.getString(1));
             location.setLatitude(cursor.getString(2));
         }
         return location;

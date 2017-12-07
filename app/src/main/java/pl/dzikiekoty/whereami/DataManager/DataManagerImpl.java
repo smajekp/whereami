@@ -35,7 +35,7 @@ public class DataManagerImpl implements DataManager{
     }
     private void openDatabase() {
         if (!db.isOpen()) {
-            db = SQLiteDatabase.openDatabase(Environment.getDataDirectory() + "/data/pl.dzikiekoty.whereami/databases/database.db", null, SQLiteDatabase.OPEN_READWRITE);
+            db = SQLiteDatabase.openDatabase(Environment.getDataDirectory() + "/data/pl.dzikiekoty.whereami/databases/databaselocation.db", null, SQLiteDatabase.OPEN_READWRITE);
             locationDAO = new LocationDao(db);
         }
     }

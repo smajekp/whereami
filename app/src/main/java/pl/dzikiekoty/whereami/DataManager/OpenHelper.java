@@ -12,7 +12,7 @@ import pl.dzikiekoty.whereami.Tables.LocationTable;
 
 public class OpenHelper extends SQLiteOpenHelper {
     private static OpenHelper instance;
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 4;
     public static synchronized OpenHelper getHelper(Context context){
         if(instance == null){
             instance = new OpenHelper(context);
@@ -21,7 +21,7 @@ public class OpenHelper extends SQLiteOpenHelper {
     }
 
     OpenHelper(Context context){
-        super(context, "database.db", null,DATABASE_VERSION);
+        super(context, "databaselocation.db", null,DATABASE_VERSION);
     }
     //Not necessary
 
@@ -37,7 +37,7 @@ public class OpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        LocationTable.onUpgrade(db, oldVersion, newVersion);
     }
 
 }
