@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.dzikiekoty.whereami.DataManager.DataManager;
@@ -51,14 +52,13 @@ public class ListFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         dataManager = new DataManagerImpl(getActivity());
-        //for(int i = 0; i < 100; i++)
-        //   dataManager.deleteLocation(i);
         view = inflater.inflate(R.layout.fragment_list, container, false);
         add = view.findViewById(R.id.addBtn);
         idLatitude = getActivity().getIntent().getIntExtra("UniqueKeyV2",0);
         loc = new Location( 0, "", "");
 
         loclist = dataManager.getLocations();
+        Collections.reverse(loclist);
         adapter = new ListAdapter(getActivity(), loclist);
         lv = view.findViewById(R.id.list);
         if(lv!=null)
@@ -85,12 +85,14 @@ public class ListFragment extends Fragment
                     adapter.notifyDataSetChanged();
                     lv.invalidateViews();
                     lv.scrollBy(0, 0);
-                    //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
                     Toast.makeText(getActivity(), "Dodano lokalizacje", Toast.LENGTH_SHORT).show();
 
                     loclist = dataManager.getLocations();
+                    Collections.reverse(loclist);
                     adapter = new ListAdapter(getActivity(), loclist);
                     lv = view.findViewById(R.id.list);
+
                     if (lv != null)
                         lv.setAdapter(adapter);
                 }
@@ -113,13 +115,13 @@ public class ListFragment extends Fragment
 
         return view;
     }
-    /*private final LocationListener locationListenerGPS = new LocationListener() {
+    private final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
-            loc.setLongitude(String.valueOf(longitudeGPS));
-            loc.setLatitude(String.valueOf(latitudeGPS));
-            dataManager.saveLocation(loc);
+            //loc.setLongitude(String.valueOf(longitudeGPS));
+            //loc.setLatitude(String.valueOf(latitudeGPS));
+            //dataManager.saveLocation(loc);
 
         }
 
@@ -137,5 +139,5 @@ public class ListFragment extends Fragment
         public void onProviderDisabled(String s) {
 
         }
-    };*/
+    };
 }
