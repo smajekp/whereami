@@ -50,7 +50,7 @@ public class ListFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         add = view.findViewById(R.id.addBtn);
         idLatitude = getActivity().getIntent().getIntExtra("UniqueKeyV2",0);
-        loc = new Location( 0, "", "");
+        //loc = new Location( 0, "", "");
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +69,6 @@ public class ListFragment extends Fragment
         loclist = dataManager.getLocations();
         ListAdapter adapter = new ListAdapter(getActivity(), loclist);
         lv = view.findViewById(R.id.list);
-        Location newloc = new Location(1, "test", "test");
-        //adapter.add(newloc);
-        dataManager.saveLocation(newloc);
-        Location newloc1 = new Location(2, "test2", "test2");
-        adapter.add(newloc1);
         if(lv!=null)
             lv.setAdapter(adapter);
         return view;
