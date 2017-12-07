@@ -11,7 +11,7 @@ import java.util.Set;
 public class Location {
 
     private int idLocation;
-    private String longtitude;
+    private String longitude;
     private String latitude;
 
     public Location() {
@@ -19,7 +19,7 @@ public class Location {
 
     public Location(int idLocation, String longtitude, String latitude) {
         this.idLocation = idLocation;
-        this.longtitude = longtitude;
+        this.longitude = longtitude;
         this.latitude = latitude;
     }
 
@@ -31,12 +31,12 @@ public class Location {
         this.idLocation = idLocation;
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(String longtitude) {
+        this.longitude = longtitude;
     }
 
     public String getLatitude() {

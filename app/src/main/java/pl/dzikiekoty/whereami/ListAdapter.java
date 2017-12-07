@@ -26,9 +26,9 @@ public class ListAdapter extends ArrayAdapter<Location>
         {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row, parent, false);
         }
-        TextView longtitude = convertView.findViewById(R.id.Row1);
+        TextView longitude = convertView.findViewById(R.id.Row1);
         TextView latitude = convertView.findViewById(R.id.Row2);
-        longtitude.setText("Longitude: " + loc.getLongtitude() + "");
+        longitude.setText("Longitude: " + loc.getLongitude() + "");
         latitude.setText("Latitude: " + loc.getLatitude());
         return convertView;
     }

@@ -1,6 +1,7 @@
 package pl.dzikiekoty.whereami;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -33,14 +34,18 @@ public class ListFragment extends Fragment
     Button add;
     LocationManager locationManager;
     double longitudeGPS, latitudeGPS;
-    private DataManager dataManager;
+
     private Location loc;
+    private int idLatitude;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         add = view.findViewById(R.id.addBtn);
+        idLatitude = getActivity().getIntent().getIntExtra("UniqueKeyV2",0);
+        loc = new Location( 0, "", "");
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,10 +63,11 @@ public class ListFragment extends Fragment
         ArrayList<Location> list = new ArrayList<>();
         ListAdapter adapter = new ListAdapter(getActivity(), list);
         lv = view.findViewById(R.id.list);
-        /*Location newloc = new Location(1, "test", "test");
+        Location newloc = new Location(1, "test", "test");
         adapter.add(newloc);
+        //dataManager.saveLocation(newloc);
         Location newloc1 = new Location(2, "test2", "test2");
-        adapter.add(newloc1);*/
+        adapter.add(newloc1);
         if(lv!=null)
             lv.setAdapter(adapter);
         return view;
@@ -70,9 +76,9 @@ public class ListFragment extends Fragment
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
-            loc = new Location(0, String.valueOf(longitudeGPS), String.valueOf(latitudeGPS));
-            dataManager.saveLocation(loc);
-
+            loc.setLongitude(String.valueOf(longitudeGPS));
+            loc.setLatitude(String.valueOf(latitudeGPS));
+            MainActivity.dataManager.saveLocation(loc);
 
         }
 

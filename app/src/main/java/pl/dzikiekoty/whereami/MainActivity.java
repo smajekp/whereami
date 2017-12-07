@@ -16,18 +16,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import pl.dzikiekoty.whereami.DataManager.DataManager;
+import pl.dzikiekoty.whereami.DataManager.DataManagerImpl;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SettingsFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener {
     LocationManager locationManager;
     SharedPreferences sharedpreferences;
     public static final String mypreference = "mypref";
     public static final String Name = "nameKey";
     private int value;
+    public static DataManager dataManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        dataManager = new DataManagerImpl(this);
         sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
         String strValue = sharedpreferences.getString(Name, "");
         int nInt = 0;
