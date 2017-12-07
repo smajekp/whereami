@@ -74,22 +74,26 @@ public class ListFragment extends Fragment
                 }
                 locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
                 android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                longitudeGPS = location.getLongitude();
-                latitudeGPS = location.getLatitude();
-                loc.setLongitude(String.valueOf(longitudeGPS));
-                loc.setLatitude(String.valueOf(latitudeGPS));
-                dataManager.saveLocation(loc);
-                adapter.notifyDataSetChanged();
-                lv.invalidateViews();
-                lv.scrollBy(0, 0);
-                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
-                Toast.makeText(getActivity(), "Dodano lokalizacje", Toast.LENGTH_SHORT).show();
 
-                loclist = dataManager.getLocations();
-                adapter = new ListAdapter(getActivity(), loclist);
-                lv = view.findViewById(R.id.list);
-                if(lv!=null)
-                    lv.setAdapter(adapter);
+                if(location != null) {
+
+                    longitudeGPS = location.getLongitude();
+                    latitudeGPS = location.getLatitude();
+                    loc.setLongitude(String.valueOf(longitudeGPS));
+                    loc.setLatitude(String.valueOf(latitudeGPS));
+                    dataManager.saveLocation(loc);
+                    adapter.notifyDataSetChanged();
+                    lv.invalidateViews();
+                    lv.scrollBy(0, 0);
+                    //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+                    Toast.makeText(getActivity(), "Dodano lokalizacje", Toast.LENGTH_SHORT).show();
+
+                    loclist = dataManager.getLocations();
+                    adapter = new ListAdapter(getActivity(), loclist);
+                    lv = view.findViewById(R.id.list);
+                    if (lv != null)
+                        lv.setAdapter(adapter);
+                }
 
             }
         });
