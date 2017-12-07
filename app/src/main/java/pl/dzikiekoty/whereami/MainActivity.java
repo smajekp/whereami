@@ -54,14 +54,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button mClickButton3 = (Button)findViewById(R.id.listBtn);
         mClickButton3.setOnClickListener(this);
 
-        // set welcome screen on start
-        HomeFragment fragment0 = new HomeFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (savedInstanceState == null){
+            /// set welcome screen on start
+            HomeFragment fragment0 = new HomeFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.linear, fragment0);
-        transaction.addToBackStack(null);
+            transaction.replace(R.id.linear, fragment0);
+            transaction.addToBackStack(null);
 
-        transaction.commit();
+            transaction.commit();
+        } else {
+            // dont do anything
+        }
+
     }
 
     private boolean checkLocation() {
