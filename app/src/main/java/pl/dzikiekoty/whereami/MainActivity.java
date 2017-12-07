@@ -60,12 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         transaction.commit();
     }
 
-    public void goToMapActivity(View v) {
-        Intent intentMain = new Intent(MainActivity.this, MapActivity.class);
-        MainActivity.this.startActivity(intentMain);
-    }
-
-
     private boolean checkLocation() {
         if(!isLocationEnabled())
             showAlert();
@@ -129,6 +123,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 transaction.addToBackStack(null);
 
                transaction.commit();
+                break;
+            }
+            case R.id.mapBtn:{
+                MapFragment fragment4 = new MapFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.linear, fragment4);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
                 break;
             }
         }
