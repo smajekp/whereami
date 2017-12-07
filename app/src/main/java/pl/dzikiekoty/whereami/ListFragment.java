@@ -47,10 +47,12 @@ public class ListFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         dataManager = new DataManagerImpl(getActivity());
+        //for(int i = 0; i < 100; i++)
+        //   dataManager.deleteLocation(i);
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         add = view.findViewById(R.id.addBtn);
         idLatitude = getActivity().getIntent().getIntExtra("UniqueKeyV2",0);
-        //loc = new Location( 0, "", "");
+        loc = new Location( 0, "", "");
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,19 +63,25 @@ public class ListFragment extends Fragment
                     ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
                 }
                 locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+                android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                longitudeGPS = location.getLongitude();
+                latitudeGPS = location.getLatitude();
+                loc.setLongitude(String.valueOf(longitudeGPS));
+                loc.setLatitude(String.valueOf(latitudeGPS));
+                dataManager.saveLocation(loc);
+                //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListenerGPS);
+
             }
         });
 
-        //ArrayList<Location> list = new ArrayList<>();
         loclist = dataManager.getLocations();
         ListAdapter adapter = new ListAdapter(getActivity(), loclist);
         lv = view.findViewById(R.id.list);
         if(lv!=null)
-            lv.setAdapter(adapter);
+           lv.setAdapter(adapter);
         return view;
     }
-    private final LocationListener locationListenerGPS = new LocationListener() {
+    /*private final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
@@ -97,5 +105,5 @@ public class ListFragment extends Fragment
         public void onProviderDisabled(String s) {
 
         }
-    };
+    };*/
 }
