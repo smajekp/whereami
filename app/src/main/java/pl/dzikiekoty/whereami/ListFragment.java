@@ -34,6 +34,8 @@ public class ListFragment extends Fragment
     Button add;
     LocationManager locationManager;
     double longitudeGPS, latitudeGPS;
+    private List<Location> loclist;
+
 
     private Location loc;
     private int idLatitude;
@@ -63,12 +65,13 @@ public class ListFragment extends Fragment
             }
         });
 
-        ArrayList<Location> list = new ArrayList<>();
-        ListAdapter adapter = new ListAdapter(getActivity(), list);
+        //ArrayList<Location> list = new ArrayList<>();
+        loclist = dataManager.getLocations();
+        ListAdapter adapter = new ListAdapter(getActivity(), loclist);
         lv = view.findViewById(R.id.list);
         Location newloc = new Location(1, "test", "test");
-        adapter.add(newloc);
-        //dataManager.saveLocation(newloc);
+        //adapter.add(newloc);
+        dataManager.saveLocation(newloc);
         Location newloc1 = new Location(2, "test2", "test2");
         adapter.add(newloc1);
         if(lv!=null)
