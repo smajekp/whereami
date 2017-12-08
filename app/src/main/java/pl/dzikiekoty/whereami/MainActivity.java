@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.app.Fragment;
 import android.net.Uri;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,7 +47,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startService(serviceIntent);
         }
 
-        locationManager  = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+        }
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         checkLocation();
 
         Button mClickButton1 = (Button)findViewById(R.id.homeBtn);

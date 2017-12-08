@@ -76,7 +76,7 @@ public class ListFragment extends Fragment
                 android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                 if(location != null) {
-
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
                     longitudeGPS = location.getLongitude();
                     latitudeGPS = location.getLatitude();
                     loc.setLongitude(String.valueOf(longitudeGPS));
@@ -85,7 +85,6 @@ public class ListFragment extends Fragment
                     adapter.notifyDataSetChanged();
                     lv.invalidateViews();
                     lv.scrollBy(0, 0);
-                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
                     Toast.makeText(getActivity(), "Dodano lokalizacje", Toast.LENGTH_SHORT).show();
 
                     loclist = dataManager.getLocations();
@@ -119,9 +118,6 @@ public class ListFragment extends Fragment
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
-            //loc.setLongitude(String.valueOf(longitudeGPS));
-            //loc.setLatitude(String.valueOf(latitudeGPS));
-            //dataManager.saveLocation(loc);
 
         }
 
