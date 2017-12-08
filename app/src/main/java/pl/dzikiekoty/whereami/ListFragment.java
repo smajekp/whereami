@@ -73,6 +73,7 @@ public class ListFragment extends Fragment
                     ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
                 }
                 locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
                 android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                 if(location != null) {
@@ -114,7 +115,7 @@ public class ListFragment extends Fragment
 
         return view;
     }
-    private final LocationListener locationListenerGPS = new LocationListener() {
+    public final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
             latitudeGPS = location.getLatitude();
