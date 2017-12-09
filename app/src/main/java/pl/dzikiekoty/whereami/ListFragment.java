@@ -86,7 +86,7 @@ public class ListFragment extends Fragment
                     adapter.notifyDataSetChanged();
                     lv.invalidateViews();
                     lv.scrollBy(0, 0);
-                    Toast.makeText(getActivity(), getResources().getString(R.string.settings_service_on), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), getResources().getString(R.string.location_added), Toast.LENGTH_SHORT).show();
 
                     loclist = dataManager.getLocations();
                     Collections.reverse(loclist);
