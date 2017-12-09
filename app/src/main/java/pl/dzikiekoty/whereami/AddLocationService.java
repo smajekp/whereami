@@ -27,7 +27,7 @@ public class AddLocationService extends Service {
         public void run() {
             handler.post(new Runnable() {
                 public void run() {
-                   // showToast();
+                    showToast();
                 }
             });
 
@@ -51,7 +51,7 @@ public class AddLocationService extends Service {
         if (strValue != "") {
             value = Integer.parseInt(strValue);
             timer.scheduleAtFixedRate(timerTask, value * 1000, value * 1000);
-            //Toast.makeText(getApplicationContext(), "Your service has been started", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.location_service_saved) + value, Toast.LENGTH_SHORT).show();
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -80,9 +80,9 @@ public class AddLocationService extends Service {
             public void run() {
                 sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
                 String strValue = sharedpreferences.getString(Name, "");
-                if (strValue != "") {
+                if (strValue != "0") {
                     value = Integer.parseInt(strValue);
-                    //Toast.makeText(getApplicationContext(), " Wartosc " + value, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.location_service_saved_toast), Toast.LENGTH_SHORT).show();
                 }
             };
         });

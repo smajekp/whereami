@@ -28,6 +28,13 @@
             android:text="@string/settings_subtitle"
             android:textAlignment="center" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_info"
+            android:textAlignment="center" />
+
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"

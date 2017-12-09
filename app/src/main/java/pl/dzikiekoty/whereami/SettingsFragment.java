@@ -93,29 +93,46 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
     public void Save() {
         String n = name.getText().toString();
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(Name, n);
-        editor.commit();
-        Toast.makeText(getActivity(), "Zapisano", Toast.LENGTH_SHORT).show();
-
         int nInt = Integer.parseInt(n);
-        if (n != null && nInt > 0 && n != "") {
 
-            Intent serviceIntent = new Intent(getActivity(), AddLocationService.class);
-            getActivity().stopService(serviceIntent);
+        if (n != null && nInt == 0 || n == "" || nInt < 0) {
 
+            name.setText("0");
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString(Name, "0");
+            editor.commit();
+
+            Toast.makeText(getActivity(), getResources().getString(R.string.settings_service_off), Toast.LENGTH_SHORT).show();
             Intent serviceIntent2 = new Intent(getActivity(), AddLocationService.class);
-            getActivity().startService(serviceIntent2);
+            getActivity().stopService(serviceIntent2);
+
+        }
+
+        if (n != null && nInt >= 0 && n != "") {
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+            editor.putString(Name, n);
+            editor.commit();
+
+            if (n != null && nInt > 0 && n != "") {
+
+                Toast.makeText(getActivity(), getResources().getString(R.string.settings_service_on), Toast.LENGTH_SHORT).show();
+
+                Intent serviceIntent = new Intent(getActivity(), AddLocationService.class);
+                getActivity().stopService(serviceIntent);
+
+                Intent serviceIntent2 = new Intent(getActivity(), AddLocationService.class);
+                getActivity().startService(serviceIntent2);
+            }
         }
     }
 
     public void clear() {
-        name.setText("");
+        name.setText("0");
         String n = name.getText().toString();
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(Name, "");
+        editor.putString(Name, "0");
         editor.commit();
-        Toast.makeText(getActivity(), "Wyczyszczono", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getResources().getString(R.string.settings_service_off), Toast.LENGTH_SHORT).show();
         Intent serviceIntent2 = new Intent(getActivity(), AddLocationService.class);
         getActivity().stopService(serviceIntent2);
     }

@@ -12,4 +12,10 @@
     <string name="btn_map">Mapa</string>
     <string name="btn_list">Lista</string>
     <string name="btn_settings">Ustawienia</string>
+    <string name="settings_info">Jeśli wpiszesz 0, service będzie wyłączony</string>
+    <string name="settings_service_off">Service lokalizacyjny wyłączony</string>
+    <string name="settings_service_on">Service lokalizacyjny włączony</string>
+    <string name="location_added">Dodano lokalizacje</string>
+    <string name="location_service_saved">Lokalizacje bedzie zapisywana co (czas w sekundach): </string>
+    <string name="location_service_saved_toast">Lokalizacja zapisana</string>
 </resources>
