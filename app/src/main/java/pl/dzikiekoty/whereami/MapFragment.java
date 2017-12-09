@@ -15,15 +15,33 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import pl.dzikiekoty.whereami.Dao.LocationDao;
+import pl.dzikiekoty.whereami.DataManager.DataManagerImpl;
+import pl.dzikiekoty.whereami.Model.Location;
+import pl.dzikiekoty.whereami.DataManager.DataManager;
+import pl.dzikiekoty.whereami.DataManager.DataManagerImpl;
+import pl.dzikiekoty.whereami.DataManager.OpenHelper;
+import pl.dzikiekoty.whereami.Model.Location;
 /**
  * Created by Santa on 07.12.2017.
  */
 
+
 public class MapFragment extends Fragment{
+
+    public static DataManager db;
+
+
     private GoogleMap googleMap;
     MapView mMapView;
     private FragmentActivity myContext;
@@ -34,9 +52,36 @@ public class MapFragment extends Fragment{
         super.onAttach(activity);
     }
 
+    public double l1,l2,l3,l4;
+    private Location loc,loc2;
+    private List<Location> loclist;
+    private LatLng pres;
+    private List<LatLng> ltln = new ArrayList();
+    private Marker marker1;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        db = new DataManagerImpl(getActivity());
+
+
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+
+        loc = new Location( 0, "", "");
+        loclist = db.getLocations();
+        Collections.reverse(loclist);
+
+
+
+
+        for (int i = 0; i<loclist.size(); i++){
+            pres = new LatLng(
+                    Double.parseDouble(String.format("%.3f",Double.parseDouble(loclist.get(i).getLongitude()))),
+                    Double.parseDouble(String.format("%.3f",Double.parseDouble(loclist.get(i).getLatitude()))));
+            ltln.add(pres);
+        }
+
 
         mMapView = (MapView) view.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
@@ -58,20 +103,26 @@ public class MapFragment extends Fragment{
 //                mMap.setOnMyLocationButtonClickListener(this);
 //                mMap.setOnMyLocationClickListener(this);
 
-                LatLng sydney = new LatLng(-33.852, 151.211);
-                googleMap.addMarker(new MarkerOptions().position(sydney)
-                        .title("Marker in Sydney"));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                for(int ai=0; ai<ltln.size(); ai++) {
 
-                //googleMap.setMyLocationEnabled(true);
-//                CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(12).build();
-//                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+                    marker1 = googleMap.addMarker(new MarkerOptions().position(ltln.get(ai))
+                            .title(loc.getLongitude()));
+
+                }
+
+
+
+
+                googleMap.setMyLocationEnabled(true);
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(ltln.get(0)).zoom(5).build();
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             }
         });
 
         return view;
     }
+
 
     @Override
     public void onResume() {
