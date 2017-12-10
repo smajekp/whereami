@@ -44,6 +44,7 @@ public class ListAdapter extends ArrayAdapter<Location>
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+
                 fragment.deletePos(locc.getIdLocation());
                 notifyDataSetChanged();
             }

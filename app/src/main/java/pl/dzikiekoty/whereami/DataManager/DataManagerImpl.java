@@ -1,6 +1,7 @@
 package pl.dzikiekoty.whereami.DataManager;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -54,7 +55,14 @@ public class DataManagerImpl implements DataManager{
     @Override
     public Location getLocation(int locationID) {
         Location location = locationDAO.get(locationID);
+
             return location;
+    }
+
+    public Location getIndex(int locationID) {
+        Location location = locationDAO.get(locationID);
+
+        return location;
     }
 
     @Override
