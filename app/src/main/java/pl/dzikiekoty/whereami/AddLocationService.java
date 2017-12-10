@@ -33,7 +33,11 @@ public class AddLocationService extends Service implements LocationListener {
     private Handler handler = new Handler();
     LocationManager locationManager;
     boolean isGPSEnabled = false;
+    pl.dzikiekoty.whereami.Model.Location currentLocation;
 
+    double longitudeGPS, latitudeGPS;
+
+    private pl.dzikiekoty.whereami.Model.Location loc;
     boolean isNetworkEnabled = false;
     public DataManager dataManager;
 
@@ -182,10 +186,22 @@ public class AddLocationService extends Service implements LocationListener {
     //show toast method
     private void showToast() {
         location = getLocation();
-        pl.dzikiekoty.whereami.Model.Location currentLocation = new pl.dzikiekoty.whereami.Model.Location();
-        currentLocation.setLongitude(String.valueOf(location.getLongitude()));
-        currentLocation.setLatitude(String.valueOf(location.getLatitude()));
-        dataManager.saveLocation(currentLocation);
+        loc = new pl.dzikiekoty.whereami.Model.Location( 0, "", "");
+        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
+        android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
+        longitudeGPS = location.getLongitude();
+        latitudeGPS = location.getLatitude();
+        loc.setLongitude(String.valueOf(longitudeGPS));
+        loc.setLatitude(String.valueOf(latitudeGPS));
+        dataManager.saveLocation(loc);
+//        currentLocation = new pl.dzikiekoty.whereami.Model.Location();
+//        currentLocation.setLongitude(String.valueOf(location.getLongitude()));
+//        currentLocation.setLatitude(String.valueOf(location.getLatitude()));
+//        dataManager.saveLocation(currentLocation);
         handler.post(new Runnable() {
             public void run() {
                 sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
@@ -197,6 +213,29 @@ public class AddLocationService extends Service implements LocationListener {
             };
         });
     }
+
+    public final LocationListener locationListenerGPS = new LocationListener() {
+        public void onLocationChanged(android.location.Location location) {
+            longitudeGPS = location.getLongitude();
+            latitudeGPS = location.getLatitude();
+
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
+    };
 
     public double getLatitude(){
         if(location != null){
