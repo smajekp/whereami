@@ -26,26 +26,26 @@
                 android:id="@+id/homeBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Home" />
+                android:text="@string/btn_home" />
             <Button
                 android:id="@+id/mapBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="Map" />
+                android:text="@string/btn_map" />
 
             <Button
                 android:id="@+id/listBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="List" />
+                android:text="@string/btn_list" />
 
             <Button
                 android:id="@+id/settingsBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings" />
+                android:text="@string/btn_settings" />
 
         </LinearLayout>
     </LinearLayout>

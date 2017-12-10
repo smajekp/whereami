@@ -8,7 +8,7 @@
     <string name="settings_subtitle">Wpisz ilosc sekund</string>
     <string name="save_button_title">Zapisz</string>
     <string name="clear_button_title">Wyczysc</string>
-    <string name="btn_home">Dom</string>
+    <string name="btn_home">Start</string>
     <string name="btn_map">Mapa</string>
     <string name="btn_list">Lista</string>
     <string name="btn_settings">Ustawienia</string>
