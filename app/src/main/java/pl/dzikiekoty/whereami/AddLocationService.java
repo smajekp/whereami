@@ -185,19 +185,7 @@ public class AddLocationService extends Service implements LocationListener {
 
     //show toast method
     private void showToast() {
-        location = getLocation();
-        loc = new pl.dzikiekoty.whereami.Model.Location( 0, "", "");
-        locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-        }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
-        android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
-        longitudeGPS = location.getLongitude();
-        latitudeGPS = location.getLatitude();
-        loc.setLongitude(String.valueOf(longitudeGPS));
-        loc.setLatitude(String.valueOf(latitudeGPS));
-        dataManager.saveLocation(loc);
+
 //        currentLocation = new pl.dzikiekoty.whereami.Model.Location();
 //        currentLocation.setLongitude(String.valueOf(location.getLongitude()));
 //        currentLocation.setLatitude(String.valueOf(location.getLatitude()));
@@ -207,6 +195,21 @@ public class AddLocationService extends Service implements LocationListener {
                 sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE);
                 String strValue = sharedpreferences.getString(Name, "");
                 if (strValue != "0") {
+
+                    location = getLocation();
+                    loc = new pl.dzikiekoty.whereami.Model.Location( 0, "", "");
+                    locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+                    if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    }
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
+                    android.location.Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0, locationListenerGPS);
+                    longitudeGPS = location.getLongitude();
+                    latitudeGPS = location.getLatitude();
+                    loc.setLongitude(String.valueOf(longitudeGPS));
+                    loc.setLatitude(String.valueOf(latitudeGPS));
+                    dataManager.saveLocation(loc);
+
                     value = Integer.parseInt(strValue);
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.location_service_saved_toast), Toast.LENGTH_SHORT).show();
                 }
