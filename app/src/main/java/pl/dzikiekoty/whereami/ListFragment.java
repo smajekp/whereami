@@ -59,7 +59,7 @@ public class ListFragment extends Fragment
 
         loclist = dataManager.getLocations();
         Collections.reverse(loclist);
-        adapter = new ListAdapter(getActivity(), loclist);
+        adapter = new ListAdapter(getActivity(), loclist, ListFragment.this);
         lv = view.findViewById(R.id.list);
         if(lv!=null)
             lv.setAdapter(adapter);
@@ -90,7 +90,7 @@ public class ListFragment extends Fragment
 
                     loclist = dataManager.getLocations();
                     Collections.reverse(loclist);
-                    adapter = new ListAdapter(getActivity(), loclist);
+                    adapter = new ListAdapter(getActivity(), loclist, ListFragment.this);
                     lv = view.findViewById(R.id.list);
 
                     if (lv != null)
@@ -115,6 +115,13 @@ public class ListFragment extends Fragment
 
         return view;
     }
+
+    public void deletePos(int id){
+        dataManager.deleteLocation(loclist.get(1).getIdLocation());
+        loclist.remove(1);
+        adapter.notifyDataSetChanged();
+    }
+
     public final LocationListener locationListenerGPS = new LocationListener() {
         public void onLocationChanged(android.location.Location location) {
             longitudeGPS = location.getLongitude();
