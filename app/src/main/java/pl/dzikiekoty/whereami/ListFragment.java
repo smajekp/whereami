@@ -118,7 +118,7 @@ public class ListFragment extends Fragment
 
     public void deletePos(int id){
         dataManager.deleteLocation(id);
-        loclist.remove(id);
+        loclist = dataManager.getLocations();
         adapter.notifyDataSetChanged();
     }
 
