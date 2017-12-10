@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -32,12 +33,13 @@ import pl.dzikiekoty.whereami.DataManager.DataManager;
 import pl.dzikiekoty.whereami.DataManager.DataManagerImpl;
 import pl.dzikiekoty.whereami.DataManager.OpenHelper;
 import pl.dzikiekoty.whereami.Model.Location;
+
 /**
  * Created by Santa on 07.12.2017.
  */
 
 
-public class MapFragment extends Fragment{
+public class MapFragment extends Fragment {
 
     public static DataManager db;
 
@@ -52,13 +54,12 @@ public class MapFragment extends Fragment{
         super.onAttach(activity);
     }
 
-    public double l1,l2,l3,l4;
-    private Location loc,loc2;
+    public double l1, l2, l3, l4;
+    private Location loc, loc2;
     private List<Location> loclist;
     private LatLng pres;
     private List<LatLng> ltln = new ArrayList();
     private Marker marker1;
-
 
 
     @Override
@@ -68,17 +69,15 @@ public class MapFragment extends Fragment{
 
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        loc = new Location( 0, "", "");
+        loc = new Location(0, "", "");
         loclist = db.getLocations();
         Collections.reverse(loclist);
 
 
-
-
-        for (int i = 0; i<loclist.size(); i++){
+        for (int i = 0; i < loclist.size(); i++) {
             pres = new LatLng(
-                    Double.parseDouble(String.format("%.3f",Double.parseDouble(loclist.get(i).getLongitude()))),
-                    Double.parseDouble(String.format("%.3f",Double.parseDouble(loclist.get(i).getLatitude()))));
+                    Double.parseDouble(String.format("%.3f", Double.parseDouble(loclist.get(i).getLongitude()))),
+                    Double.parseDouble(String.format("%.3f", Double.parseDouble(loclist.get(i).getLatitude()))));
             ltln.add(pres);
         }
 
@@ -103,7 +102,7 @@ public class MapFragment extends Fragment{
 //                mMap.setOnMyLocationButtonClickListener(this);
 //                mMap.setOnMyLocationClickListener(this);
 
-                for(int ai=0; ai<ltln.size(); ai++) {
+                for (int ai = 0; ai < ltln.size(); ai++) {
 
 
                     marker1 = googleMap.addMarker(new MarkerOptions().position(ltln.get(ai))
@@ -112,8 +111,9 @@ public class MapFragment extends Fragment{
                 }
 
 
+                if (ActivityCompat.checkSelfPermission(myContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(myContext, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-
+                }
                 googleMap.setMyLocationEnabled(true);
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(ltln.get(0)).zoom(5).build();
                 googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
