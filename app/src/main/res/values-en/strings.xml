@@ -18,5 +18,6 @@
     <string name="location_added">Added location</string>
     <string name="location_service_saved">Location will be saved with period (in seconds): </string>
     <string name="location_service_saved_toast">Location saved</string>
+    <string name="location_deleted">Deleted location</string>
 
 </resources>

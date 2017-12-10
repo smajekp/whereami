@@ -47,6 +47,7 @@ public class ListAdapter extends ArrayAdapter<Location>
 
                 fragment.deletePos(locc.getIdLocation());
                 notifyDataSetChanged();
+
             }
         });
         return convertView;

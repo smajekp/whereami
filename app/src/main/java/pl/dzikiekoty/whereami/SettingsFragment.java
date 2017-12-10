@@ -116,6 +116,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             if (n != null && nInt > 0 && n != "") {
 
                 Toast.makeText(getActivity(), getResources().getString(R.string.settings_service_on), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.location_service_saved) + nInt, Toast.LENGTH_SHORT).show();
 
                 Intent serviceIntent = new Intent(getActivity(), AddLocationService.class);
                 getActivity().stopService(serviceIntent);

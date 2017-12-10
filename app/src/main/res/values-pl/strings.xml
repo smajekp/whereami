@@ -18,4 +18,5 @@
     <string name="location_added">Dodano lokalizacje</string>
     <string name="location_service_saved">Lokalizacje bedzie zapisywana co (czas w sekundach): </string>
     <string name="location_service_saved_toast">Lokalizacja zapisana</string>
+    <string name="location_deleted">Usunięta lokalizacja</string>
 </resources>

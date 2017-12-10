@@ -121,6 +121,7 @@ public class ListFragment extends Fragment
         loclist.clear();
         loclist.addAll(dataManager.getLocations());
         adapter.notifyDataSetChanged();
+        Toast.makeText(getActivity(), getResources().getString(R.string.location_deleted), Toast.LENGTH_SHORT).show();
     }
 
     public final LocationListener locationListenerGPS = new LocationListener() {
